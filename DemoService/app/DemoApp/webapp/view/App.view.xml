@@ -1,0 +1,38 @@
+<mvc:View controllerName="be.wl.DemoApp.controller.App" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+                    <List
+				id="list"
+				width="auto"
+				items="{
+					path: '/Books',
+					sorter: {
+						path: 'title',
+						descending: false
+					},
+					groupHeaderFactory: '.createGroupHeader'
+				}"
+				growing="true"
+				growingScrollToLoad="true">
+				<items>
+					<ObjectListItem
+						type="Navigation"
+						press=".onSelectionChange"
+						title="{title}"
+						number="{
+							path: 'stock',
+							formatter: '.formatter.currencyValue'
+						}"
+>
+					</ObjectListItem>
+				</items>
+			</List>
+                    </content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

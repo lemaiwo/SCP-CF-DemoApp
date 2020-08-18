@@ -1,0 +1,106 @@
+_schema-version: "3.1"
+ID: DemoService
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: DemoService-srv
+  type: nodejs
+  path: gen/srv
+  properties:
+    EXIT: 1
+  requires:
+  - name: DemoService-db
+  provides:
+  - name: srv-binding
+    properties:
+      public: true
+      srv-url: ${default-url}
+      url: ${default-url}
+- name: db
+  type: hdb
+  path: gen/db
+  requires:
+  - name: DemoService-db
+  parameters:
+    app-name: DemoService-db
+- name: demoservice-approuter
+  type: approuter.nodejs
+  path: app/demoservice-approuter
+  requires:
+  - name: DemoService_html_repo_runtime
+  - name: uaa_DemoService
+  - name: srv-binding
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      strictSSL: false
+      name: srv_api
+      url: '~{srv-url}'
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: DemoService_ui_deployer
+  type: com.sap.application.content
+  path: app
+  requires:
+  - name: DemoService_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - DemoApp-content.zip
+      name: DemoApp
+      target-path: resources/
+- name: DemoApp
+  type: html5
+  path: app/DemoApp
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: DemoService-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hanatrial
+    service-plan: hdi-shared
+  properties:
+    hdi-service-name: ${service-name}
+- name: DemoService_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: DemoService_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: uaa_DemoService
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: DemoService-xsuaa-service
+    service-plan: application
+- name: dest_DemoService
+  type: org.cloudfoundry.managed-service
+  parameters:
+     service-plan: lite
+     service: destination
+- name: conn_DemoService
+  type: org.cloudfoundry.managed-service
+  parameters:
+     service-plan: lite
+     service: connectivity
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install
+    - npx cds build

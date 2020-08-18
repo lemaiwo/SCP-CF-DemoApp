@@ -1,0 +1,49 @@
+_schema-version: "3.1"
+ID: AppOnly
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: AppOnly_ui_deployer
+  type: com.sap.application.content
+  path: app
+  requires:
+  - name: AppOnly_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - UIAppOnly-content.zip
+      name: UIAppOnly
+      target-path: resources/
+- name: UIAppOnly
+  type: html5
+  path: app/UIAppOnly
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: AppOnly_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: AppOnly-html5-app-host-service
+    service-plan: app-host
+- name: uaa_AppOnly
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: AppOnly-xsuaa-service
+    service-plan: application
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install
+    - npx cds build

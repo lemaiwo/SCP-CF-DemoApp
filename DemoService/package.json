@@ -1,0 +1,40 @@
+{
+  "name": "DemoService",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^3",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.4.42",
+    "@sap/hana-client": "^2.4.177",
+    "express": "^4",
+    "hdb": "^0.18.1"
+  },
+  "scripts": {
+    "start": "npx cds run"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana"
+      }
+    }
+  },
+  "devDependencies": {
+    "@sap/hdi-deploy": "3.11.11",
+    "@sap/ui5-builder-webide-extension": "1.0.x",
+    "@ui5/cli": "2.2.6",
+    "eslint": "5.16.x",
+    "@sap/eslint-plugin-ui5-jsdocs": "2.0.x",
+    "@sapui5/ts-types": "1.71.x",
+    "bestzip": "2.1.4",
+    "rimraf": "3.0.2"
+  },
+  "ui5": {
+    "dependencies": [
+      "@sap/ui5-builder-webide-extension"
+    ]
+  }
+}

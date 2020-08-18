@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "cds-deploy-to-hana-DemoService-my-bookshop-db-hdi-container",
+      "type": "shell",
+      "command": "cds",
+      "args": [
+        "deploy",
+        "--to",
+        "hana:my-bookshop-db-hdi-container",
+        "--no-save"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/DemoService"
+      },
+      "isBackground": true
+    },
+    {
+      "label": "cds-deploy-to-hana-DemoService-DemoService-db",
+      "type": "shell",
+      "command": "cds",
+      "args": [
+        "deploy",
+        "--to",
+        "hana:DemoService-db",
+        "--no-save"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/DemoService"
+      },
+      "isBackground": true
+    }
+  ]
+}
