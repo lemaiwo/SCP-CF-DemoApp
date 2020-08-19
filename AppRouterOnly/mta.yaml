@@ -1,0 +1,52 @@
+_schema-version: "3.2"
+ID: AppRouterOnly
+version: 0.0.1
+modules:
+- name: approuteronly-approuter
+  type: approuter.nodejs
+  path: approuteronly-approuter
+  requires:
+  - name: AppRouterOnly_html_repo_runtime
+  - name: uaa_DemoService
+  - name: srv-binding
+    group: destinations
+    properties:
+      forwardAuthToken: true
+      strictSSL: false
+      name: srv_api
+      url: '~{srv-url}'
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+resources:
+- name: srv-binding 
+  type: configuration
+  parameters:
+    provider-nid: mta 
+    provider-id: DemoService:srv-binding 
+    version: ">=1.0.0" 
+    target: 
+      org: ${org}     # Specifies the org of the provider MTA
+      space: ${space} # Wildcard * searches in all spaces
+- name: AppRouterOnly_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: AppRouterOnly_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: uaa_DemoService
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: DemoService-xsuaa-service
+    service-plan: application
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

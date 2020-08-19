@@ -12,8 +12,8 @@ modules:
   - name: DemoService-db
   provides:
   - name: srv-binding
+    public: true
     properties:
-      public: true
       srv-url: ${default-url}
       url: ${default-url}
 - name: db
