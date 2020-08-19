@@ -52,7 +52,7 @@
       }
     },
     {
-      "name": "Run AppOnly-1",
+      "name": "Run AppOnly",
       "request": "launch",
       "type": "node",
       "cwd": "${workspaceFolder}/AppOnly",
@@ -71,7 +71,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "envFile": "${workspaceFolder}/AppOnly/.env1",
+      "envFile": "${workspaceFolder}/AppOnly/.env3",
       "env": {
         "run.config": "{\"handlerId\":\"cap_run_config_handler_id\",\"runnableId\":\"/home/user/projects/AppOnly\"}"
       }

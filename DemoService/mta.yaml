@@ -33,9 +33,10 @@ modules:
     group: destinations
     properties:
       forwardAuthToken: true
-      strictSSL: false
       name: srv_api
-      url: '~{srv-url}'
+      strictSSL: false
+      url: ~{srv-url}
+  - name: portal_resources_DemoService
   parameters:
     disk-quota: 256M
     memory: 256M
@@ -61,6 +62,18 @@ modules:
     commands:
     - npm run build
     supported-platforms: []
+- name: flp
+  type: com.sap.portal.content
+  path: flp
+  requires:
+  - name: portal_resources_DemoService
+  - name: DemoService_html_repo_host
+  - name: DemoService_ui_deployer
+  - name: uaa_DemoService
+  parameters:
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
+    memory: 128M
+    stack: cflinuxfs3
 resources:
 - name: DemoService-db
   type: com.sap.xs.hdi-container
@@ -89,13 +102,18 @@ resources:
 - name: dest_DemoService
   type: org.cloudfoundry.managed-service
   parameters:
-     service-plan: lite
-     service: destination
+    service: destination
+    service-plan: lite
 - name: conn_DemoService
   type: org.cloudfoundry.managed-service
   parameters:
-     service-plan: lite
-     service: connectivity
+    service: connectivity
+    service-plan: lite
+- name: portal_resources_DemoService
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: portal
+    service-plan: standard
 parameters:
   enable-parallel-deployments: true
 build-parameters:

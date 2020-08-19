@@ -25,6 +25,18 @@ modules:
     commands:
     - npm run build
     supported-platforms: []
+- name: flp
+  type: com.sap.portal.content
+  path: flp
+  requires:
+  - name: portal_resources_AppOnly
+  - name: AppOnly_html_repo_host
+  - name: AppOnly_ui_deployer
+  - name: uaa_AppOnly
+  parameters:
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
+    memory: 128M
+    stack: cflinuxfs3
 resources:
 - name: AppOnly_html_repo_host
   type: org.cloudfoundry.managed-service
@@ -39,6 +51,11 @@ resources:
     service: xsuaa
     service-name: AppOnly-xsuaa-service
     service-plan: application
+- name: portal_resources_AppOnly
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: portal
+    service-plan: standard
 parameters:
   enable-parallel-deployments: true
 build-parameters:

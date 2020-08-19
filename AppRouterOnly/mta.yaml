@@ -8,6 +8,7 @@ modules:
   requires:
   - name: AppRouterOnly_html_repo_runtime
   - name: uaa_DemoService
+  - name: portal_resources_DemoService
   - name: srv-binding
     group: destinations
     properties:
@@ -45,6 +46,11 @@ resources:
     service: xsuaa
     service-name: DemoService-xsuaa-service
     service-plan: application
+- name: portal_resources_DemoService
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: portal
+    service-plan: standard
 build-parameters:
   before-all:
   - builder: custom
