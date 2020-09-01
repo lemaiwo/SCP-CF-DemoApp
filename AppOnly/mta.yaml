@@ -42,7 +42,6 @@ resources:
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
-    service-name: AppOnly-html5-app-host-service
     service-plan: app-host
 - name: uaa_AppOnly
   type: org.cloudfoundry.managed-service

@@ -22,14 +22,9 @@
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "Dynamic",
+                    "semanticObject": "AppOnly",
                     "action": "display",
-                    "title": "{{appTitle}}",
-                    "indicatorDataSource": {
-                        "dataSource": "mainService",
-                        "path": "Books/$count",
-                        "refresh": 1000
-                    }
+                    "title": "{{appTitle}}"
                 }
             }
         },

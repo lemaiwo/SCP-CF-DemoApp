@@ -15,6 +15,19 @@
 			"id": "html5moduletemplates.basicSAPUI5ApplicationProjectModule",
 			"version": "1.40.12"
 		},
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "Demo",
+                    "action": "display",
+                    "title": "{{appTitle}}"
+                }
+            }
+        },
 		"dataSources": {
 			"mainService": {
 				"uri": "v2/browse/",

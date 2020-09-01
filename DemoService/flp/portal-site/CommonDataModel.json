@@ -1,7 +1,7 @@
 {
 	"_version": "3.0.0",
 	"identification": {
-		"id": "7f9c57ab-f289-4ff1-b79d-45f119029344",
+		"id": "ecdccb25-63a5-48eb-8b27-3b03d98ec849",
 		"entityType": "bundle"
 	},
 	"payload": {
@@ -27,16 +27,16 @@
 			},
 			"payload": {
 				"viz": [{
-					"id": "be.wl.UIAppOnly-0-1598990769283",
-					"appId": "be.wl.UIAppOnly",
-					"vizId": "AppOnly-display"
+					"id": "be.wl.DemoApp-0-1598989712549",
+					"appId": "be.wl.DemoApp",
+					"vizId": "Demo-display"
 				}]
 			}
 		}],
 		"sites": [{
 			"_version": "3.0.0",
 			"identification": {
-				"id": "c64f1d4a-c91f-47a9-a128-0b245b906870",
+				"id": "ec233583-e12b-4a9e-a592-ad7ea1ea56fe",
 				"entityType": "site",
 				"title": "SAP Fiori launchpad site on Cloud Foundry",
 				"description": "SAP Fiori launchpad site on Cloud Foundry, deployed from WING"

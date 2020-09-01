@@ -8,27 +8,27 @@ modules:
   requires:
   - name: AppRouterOnly_html_repo_runtime
   - name: uaa_DemoService
-  - name: portal_resources_DemoService
   - name: srv-binding
     group: destinations
     properties:
       forwardAuthToken: true
-      strictSSL: false
       name: srv_api
-      url: '~{srv-url}'
+      strictSSL: false
+      url: ~{srv-url}
+  - name: portal_resources_AppRouterOnly
   parameters:
     disk-quota: 256M
     memory: 256M
 resources:
-- name: srv-binding 
+- name: srv-binding
   type: configuration
   parameters:
-    provider-nid: mta 
-    provider-id: DemoService:srv-binding 
-    version: ">=1.0.0" 
-    target: 
-      org: ${org}     # Specifies the org of the provider MTA
-      space: ${space} # Wildcard * searches in all spaces
+    provider-id: DemoService:srv-binding
+    provider-nid: mta
+    target:
+      org: ${org}
+      space: ${space}
+    version: '>=1.0.0'
 - name: AppRouterOnly_html_repo_runtime
   type: org.cloudfoundry.managed-service
   parameters:
@@ -46,7 +46,7 @@ resources:
     service: xsuaa
     service-name: DemoService-xsuaa-service
     service-plan: application
-- name: portal_resources_DemoService
+- name: portal_resources_AppRouterOnly
   type: org.cloudfoundry.managed-service
   parameters:
     service: portal
