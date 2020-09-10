@@ -25,9 +25,9 @@ modules:
     commands:
     - npm run build
     supported-platforms: []
-- name: flp
+- name: AppOnly_launchpad_deployer
   type: com.sap.portal.content
-  path: flp
+  path: launchpad
   requires:
   - name: portal_resources_AppOnly
   - name: AppOnly_html_repo_host

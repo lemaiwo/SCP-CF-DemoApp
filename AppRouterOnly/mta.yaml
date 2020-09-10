@@ -34,11 +34,6 @@ resources:
   parameters:
     service: html5-apps-repo
     service-plan: app-runtime
-- name: AppRouterOnly_html_repo_host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-plan: app-host
 - name: uaa_DemoService
   type: org.cloudfoundry.managed-service
   parameters:

@@ -54,6 +54,10 @@ modules:
       - DemoApp-content.zip
       name: DemoApp
       target-path: resources/
+    - artifacts:
+      - HTML5Module-content.zip
+      name: HTML5Module
+      target-path: resources/
 - name: DemoApp
   type: html5
   path: app/DemoApp
@@ -74,6 +78,14 @@ modules:
     buildpack: https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.51/nodejs-buildpack-cflinuxfs3-v1.6.51.zip
     memory: 128M
     stack: cflinuxfs3
+- name: HTML5Module
+  type: html5
+  path: app/HTML5Module
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
 resources:
 - name: DemoService-db
   type: com.sap.xs.hdi-container
